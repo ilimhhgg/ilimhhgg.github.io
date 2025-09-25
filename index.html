@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Выбор языка — примеры JPEG</title>
+    <style>
+        :root{
+            --bg:#FEF0EF;
+            --card-bg:#ffffff;
+            --accent:#ff6b81;
+            --muted:#777;
+            --radius:14px;
+        }
+        *{box-sizing:border-box}
+        html{height:100%} /* Оставляем на html для фона */
+
+        /* --- ИЗМЕНЕНО: Убран Flex-центрирование для поддержки прокрутки --- */
+        body{
+            margin:0;
+            font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+            background: radial-gradient(circle at 20% 10%, #fff 0%, rgba(255,255,255,0) 30%), var(--bg);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+        }
+
+        /* --- ИЗМЕНЕНО: Добавлено margin: auto для надёжного центрирования --- */
+        .container{
+            width:100%;
+            max-width:880px;
+            margin: 40px auto; /* Вертикальные отступы и горизонтальное авто-центрирование */
+            background:var(--card-bg);
+            border-radius:20px;
+            box-shadow:0 12px 40px rgba(0,0,0,0.08);
+            padding:28px;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .header{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:16px;
+            margin-bottom:18px;
+            flex-wrap:wrap;
+        }
+                .header-content2 {
+    display: flex; /* Делаем дочерние элементы flex-контейнером */
+    flex-direction: column; /* Располагаем элементы вертикально */
+    align-items: center; /* Центрируем по горизонтали: лого, подзаголовки */
+    text-align: center; /* Центрируем текст внутри <p> */
+}
+
+        .header > div:first-child{
+            min-width:0;
+            flex:1 1 auto;
+        }
+
+        h3{
+            margin:0;
+            font-size:20px;
+            color:#222;
+            letter-spacing:0.2px;
+            white-space:normal;
+            overflow-wrap:break-word;
+            word-break:break-word;
+        }
+
+        .langs{
+            display:flex;
+            gap:10px;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
+        .langs button{
+            appearance:none;
+            border:0;
+            background:transparent;
+            padding:10px 14px;
+            border-radius:999px;
+            cursor:pointer;
+            font-weight:600;
+            color:var(--accent);
+            border:2px solid rgba(255,107,129,0.12);
+            transition:all .18s ease;
+            min-width:84px;
+            flex:0 1 auto;
+        }
+        .langs button:hover{ transform:translateY(-px) }
+        .langs button.active{
+            background:linear-gradient(90deg,var(--accent),#ff9aa2);
+            color:#fff;
+            box-shadow:0 6px 18px rgba(255,107,129,0.18);
+            border-color:transparent;
+        }
+
+        .subtitle{
+            color:var(--muted);
+            font-size:14px;
+            margin:0 0 14px 0;
+        }
+
+        .images{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:16px;
+        }
+
+        .image-block {
+            display: flex;
+            flex-direction: column; /* По умолчанию на десктопе - вертикально */
+            gap: 12px;
+            border: 1px solid #f0f0f0;
+            border-radius: 16px;
+            padding: 12px;
+            background: #fafafa55;
+        }
+        
+        .image-block img{
+            width:100%;
+            height:auto;
+            display:block;
+            border-radius:12px;
+            box-shadow:0 6px 18px rgba(0,0,0,0.06);
+            border:1px solid rgba(0,0,0,0.03);
+            cursor: zoom-in; /* Курсор при наведении на изображение */
+        }
+
+        .image-block video {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow:0 6px 18px rgba(0,0,0,0.06);
+        }
+        
+        .caption {
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+            padding-bottom: 5px;
+            min-height: 1.2em;
+        }
+
+        @media (max-width:640px){
+            /* --- ИЗМЕНЕНО: Отступы для мобильной версии --- */
+            .container{ padding:18px; margin: 20px auto; }
+            h3{ font-size:18px; }
+            .header{ flex-direction:column; align-items:center; gap:10px; }
+            .langs{ align-self:stretch; justify-content:flex-start; }
+            .langs button{ padding:10px 12px; min-width:0; flex:1 1 auto; }
+            .images{ grid-template-columns:1fr; gap:12px; }
+            .image-block img, .image-block video{ border-radius:10px; }
+            
+            /* === СТИЛИ ДЛЯ ГОРИЗОНТАЛЬНОГО РАСПОЛОЖЕНИЯ (ИЗОБРАЖЕНИЕ СЛЕВА, ВИДЕО СПРАВА) === */
+            .image-block {
+                flex-direction: row; /* Изображение и видео в ряд */
+                flex-wrap: wrap; 
+                align-items: flex-start; /* Выравнивание элементов по верху */
+                gap: 0; /* Удаляем стандартный gap для тонкой настройки */
+            }
+
+            .image-block img, .image-block video {
+                flex: 1 1 48%; /* Каждый занимает примерно половину ширины */
+                width: auto; /* Сброс width:100% */
+                min-width: 140px; /* Минимальная ширина, чтобы не было слишком узко */
+                max-width: 100%;
+            }
+            
+            /* Отступ между img и video */
+            .image-block img:first-child:not(:only-child) {
+                margin-right: 4%; /* Отступ справа для первого элемента (изображения) */
+            }
+
+            .caption {
+                flex: 1 1 100%; /* Заголовок занимает всю ширину */
+                margin-top: 10px; /* Отступ сверху для заголовка, чтобы отделить его от медиа */
+            }
+        }
+
+        /* ==================== НОВЫЕ СТИЛИ ДЛЯ МОДАЛЬНОГО ОКНА ==================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8); /* Темный полупрозрачный фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Поверх всего */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-content img {
+            display: block;
+            width: auto; /* Автоматическая ширина */
+            height: auto; /* Автоматическая высота */
+            max-width: 100%; /* Ограничение по ширине модального окна */
+            max-height: 85vh; /* Ограничение по высоте, чтобы влезло на экран */
+            border-radius: 5px;
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 30px;
+            color: #ccc;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0 5px;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close-button:hover {
+            color: #fff;
+        }
+        .header-content {
+    display: flex; /* Делаем дочерние элементы flex-контейнером */
+    flex-direction: column; /* Располагаем элементы вертикально */
+    align-items: center; /* Центрируем по горизонтали: лого, подзаголовки */
+    text-align: center; /* Центрируем текст внутри <p> */
+}
+
+/* Изменяем .header, чтобы он центрировал свое содержимое (header-content и langs) */
+.header {
+    display: flex;
+    flex-direction: column; /* Располагаем блоки (лого и языки) друг под другом */
+    align-items: center; /* Центрируем всю шапку по центру страницы */
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    /* УДАЛЕНО: justify-content: space-between; так как мы теперь хотим центрировать */
+}
+
+/* Убираем растягивание, так как flex-direction: column уже центрирует */
+.header > div:first-child {
+    min-width: 0;
+    /* УДАЛЕНО: flex: 1 1 auto; */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container" role="main">
+        <div class="header">
+            <div сlass="header-content2">
+                <img src="логокидс.png" width="100px" height="100px" alt="ad">
+                <p class="subtitle">Нажмите на изображения чтобы увеличить</p>
+                <p class="subtitle">Чоңойтуу үчүн сүрөттөрдү басыңыз.</p>
+            </div>
+
+            <div class="langs" role="tablist" aria-label="Язык">
+                <button data-lang="ru" aria-pressed="true">Русский</button>
+                <button data-lang="kg" aria-pressed="false">Кыргызча</button>
+            </div>
+        </div>
+
+        <div class="images" aria-live="polite">
+            
+            <div class="image-block">
+                <img class="lang-image"
+                    src="price_ru.jpeg"
+                    data-src-ru="price_ru.jpeg"
+                    data-src-kg="price_kg.jpeg"
+                    alt="страница 1" />
+                
+                <video class="lang-video" controls playsinline
+                    src="видео-инструкция-термо.mp4"
+                    data-src-ru="видео-инструкция-термо.mp4"
+                    data-src-kg="видео-инструкция-термо-к.mp4"
+                    data-text-ru="Цена: 
+1 лист 400 сом - 40 шт наклеек 
+0,5 лист 300 сом - 20 шт наклеек  
+_
+* На 1 лист 1 имя 
+* Срок изготовления 2-4 рабочих дней"
+                    data-text-kg="Баасы: 
+1 лист 400 сом - 40 шт наклейка 
+0,5 лист 300 сом - 20 шт наклейка
+_
+* 1 листке 1 ат жазылат 
+* 2-4 жумуш кундо даяр болот">
+                    Ваш браузер не поддерживает видео.
+                </video>
+                
+                <p class="caption lang-text"></p>
+            </div>
+
+
+            <div class="image-block">
+                <img class="lang-image"
+                    src="price_ru2.jpeg"
+                    data-src-ru="price_ru2.jpeg"
+                    data-src-kg="price_kg2.jpeg"
+                    alt="страница 2" />
+                
+                <video class="lang-video" controls playsinline
+                    src="видео-инструкция-канц.mp4"
+                    data-src-ru="видео-инструкция-канц.mp4"
+                    data-src-kg="видео-инструкция-канц-к.mp4"
+                    data-text-ru="Цена: 
+400 сом 1 лист
+(на листе 78 шт наклеек) 
+33 шт больших 
+45 шт маленьких 
+_
+* На 1 лист 1 имя 
+* Срок изготовления 2-4 рабочих дней"
+                    data-text-kg="Баасы: 
+400 сом 1 лист
+(Листте 78 шт наклейка) 
+33 шт чон 
+45 шт кичинекей
+_
+* 1 листке 1 ат жазылат 
+* 2-4 жумуш кундо даяр болот">
+                    Ваш браузер не поддерживает видео.
+                </video>
+                
+                <p class="caption lang-text"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close-button">&times;</button>
+            <img src="" alt="Увеличенное изображение" id="modalImage">
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const buttons = document.querySelectorAll('.langs [data-lang]');
+            const imageBlocks = document.querySelectorAll('.image-block');
+            const modalOverlay = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeButton = modalOverlay.querySelector('.modal-close-button');
+
+            function setLanguage(lang){
+                buttons.forEach(b => {
+                    const active = b.dataset.lang === lang;
+                    b.classList.toggle('active', active);
+                    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+                });
+
+                const capitalLang = lang.charAt(0).toUpperCase() + lang.slice(1);
+                const srcKey = `src${capitalLang}`;
+                const textKey = `text${capitalLang}`;
+                
+                imageBlocks.forEach(block => {
+                    const img = block.querySelector('.lang-image');
+                    const video = block.querySelector('.lang-video');
+                    const caption = block.querySelector('.lang-text');
+
+                    if (img && img.dataset[srcKey]) {
+                        img.src = img.dataset[srcKey];
+                    }
+
+                    if (video && video.dataset[srcKey]) {
+                        if (video.getAttribute('src') !== video.dataset[srcKey]) {
+                            video.src = video.dataset[srcKey];
+                            video.load();
+                        }
+                    }
+                    
+                    if (caption && video && video.dataset[textKey]) {
+                        caption.textContent = video.dataset[textKey];
+                    } else if (caption) {
+                        caption.textContent = '';
+                    }
+                });
+                
+                localStorage.setItem('preferredLang', lang);
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+            });
+
+            // === НОВЫЙ JavaScript для модального окна ===
+            document.querySelectorAll('.lang-image').forEach(img => {
+                img.addEventListener('click', function() {
+                    modalImage.src = this.src; // Устанавливаем src модального изображения
+                    modalOverlay.classList.add('active'); // Показываем модальное окно
+                    document.body.style.overflow = 'hidden'; // Запрещаем прокрутку фона
+                });
+            });
+
+            // Закрытие модального окна по клику на overlay
+            modalOverlay.addEventListener('click', function(event) {
+                if (event.target === modalOverlay) { // Если клик был именно по фону
+                    modalOverlay.classList.remove('active');
+                    document.body.style.overflow = ''; // Восстанавливаем прокрутку
+                }
+            });
+
+            // Закрытие модального окна по клику на кнопку закрытия
+            closeButton.addEventListener('click', function() {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Восстанавливаем прокрутку
+            });
+
+            const savedLang = localStorage.getItem('preferredLang') || 'ru';
+            setLanguage(savedLang);
+        })();
+    </script>
+</body>
+</html>
